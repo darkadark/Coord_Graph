@@ -137,7 +137,6 @@ void CCoordGraphView::OnDraw(CDC* pdc)
 		res1.Format(L"(%.2f, %.2f)", res[0], res[1]);
 		pDC.TextOut(rc.Width() / 10 + rc.Width() * 0.8 * (res[0] - l[0])/ (r[0]-l[0]), rc.Height() * 0.9 - rc.Height() * 0.8 * (res[1] - l[1]) / (r[1] - l[1]), res1);
 		
-		
 		//CString size;
 		//size.Format(L"%d", path.size());
 		//pDC.TextOut(rc.Width() / 2, rc.Height() /2, size);
@@ -151,7 +150,14 @@ void CCoordGraphView::OnDraw(CDC* pdc)
 			pDC.LineTo(rc.Width() / 10 + rc.Width() * 0.8 * (path[i + 1][0] - l[0]) / (r[0] - l[0]), rc.Height() * 0.9 - rc.Height() * 0.8 * (path[i + 1][1] - l[1]) / (r[1] - l[1]));
 			//pDC->MoveTo(rc.Width() / 10, rc.Height() / 10);
 		}
-	
+
+		
+		CString res11;
+		
+		if( j == 1){ pDC.TextOut(rc.Width() / 4, rc.Height() * 0.05, L" METHOD COORDINATE DESCENT"); }
+		if (j == 2) { pDC.TextOut(rc.Width() / 4, rc.Height() * 0.05, L" METHOD RANDOM SEARCH"); }
+		res11.Format(L"x_0 = (%.2f, %.2f)", path[0][0], path[0][1]);
+		pDC.TextOut(rc.Width() /2, rc.Height() * 0.05, res11);
 		pdc->BitBlt(0, 0, rc.Width(), rc.Height(), &pDC, 0, 0, SRCCOPY);
 	}
 	// TODO: добавьте здесь код отрисовки для собственных данных
