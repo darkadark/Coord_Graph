@@ -218,10 +218,13 @@
     <ResourceCompile Include="CoordGraph.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="res\bmp00001.bmp" />
     <Image Include="res\Coord_Graph.ico" />
     <Image Include="res\Coord_GraphDoc.ico" />
     <Image Include="res\Toolbar.bmp" />
+    <Image Include="res\toolbar1.bmp" />
     <Image Include="res\Toolbar256.bmp" />
+    <Image Include="res\Toolbar2561.bmp" />
     <Image Include="res\userimages.bmp" />
   </ItemGroup>
   <ItemGroup>

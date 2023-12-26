@@ -12,7 +12,6 @@
 #define IDS_TOOLBAR_CUSTOMIZE           125
 #define ID_VIEW_CUSTOMIZE               126
 #define IDR_MAINFRAME                   128
-#define IDR_MAINFRAME_256               129
 #define IDR_CoordGraphTYPE              130
 #define IDR_THEME_MENU                  200
 #define ID_SET_STYLE                    201
@@ -53,7 +52,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        312
+#define _APS_NEXT_RESOURCE_VALUE        322
 #define _APS_NEXT_COMMAND_VALUE         32775
 #define _APS_NEXT_CONTROL_VALUE         1009
 #define _APS_NEXT_SYMED_VALUE           310

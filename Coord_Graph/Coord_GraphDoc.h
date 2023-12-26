@@ -23,11 +23,12 @@ public:
 // Операции
 public:
 	virtual int GetI();
-	virtual std::vector<double> CCoordGraphDoc::GetRes();
+	virtual std::vector<double> CCoordGraphDoc::GetX0();
 	virtual std::vector<double> CCoordGraphDoc::GetLB();
 	virtual std::vector<double> CCoordGraphDoc::GetRB();
 	std::vector<std::vector<double>> CCoordGraphDoc::GetPATH();
 	func* CCoordGraphDoc::GetF();
+	MultdimOpt* CCoordGraphDoc::GetMULTDIMOPT();
 
 // Переопределение
 public:
@@ -50,7 +51,7 @@ protected:
 	int i;
 	CDeterm det;
 	CRandom rand;
-	std::vector<double> res;
+	std::vector<double> x0;
 	std::vector<double> l;
 	std::vector<double> r;
 	std::vector<std::vector<double>> path;

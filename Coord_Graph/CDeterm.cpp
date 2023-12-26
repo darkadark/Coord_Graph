@@ -70,7 +70,7 @@ void CDeterm::OnEnKillfocusSx()
 	UpdateData(1);
 	CStringA s(m_start_x);
 	const char* p = s;
-	if (!atof(p)) {
+	if (!atof(p) && s != "0") {
 		MessageBox(L"Incorrect value!", MB_OK);
 		m_start_x = L"0.5";
 		UpdateData(0);
@@ -84,7 +84,7 @@ void CDeterm::OnEnKillfocusSy()
 	UpdateData(1);
 	CStringA s(m_start_y);
 	const char* p = s;
-	if (!atof(p)) {
+	if (!atof(p) && s != "0") {
 		MessageBox(L"Incorrect value!", MB_OK);
 		m_start_y = L"0.5";
 		UpdateData(0);
@@ -98,7 +98,7 @@ void CDeterm::OnEnKillfocusLx()
 	UpdateData(1);
 	CStringA s(m_left_x);
 	const char* p = s;
-	if (!atof(p)) {
+	if (!atof(p) && s != "0") {
 		MessageBox(L"Incorrect value!", MB_OK);
 		m_left_x = L"0";
 		UpdateData(0);
@@ -112,7 +112,7 @@ void CDeterm::OnEnKillfocusLy()
 	UpdateData(1);
 	CStringA s(m_left_y);
 	const char* p = s;
-	if (!atof(p)) {
+	if (!atof(p) && s != "0") {
 		MessageBox(L"Incorrect value!", MB_OK);
 		m_left_y = L"0";
 		UpdateData(0);
@@ -126,7 +126,7 @@ void CDeterm::OnEnKillfocusRx()
 	UpdateData(1);
 	CStringA s(m_right_x);
 	const char* p = s;
-	if (!atof(p)) {
+	if (!atof(p) && s != "0") {
 		MessageBox(L"Incorrect value!", MB_OK);
 		m_right_x = L"1";
 		UpdateData(0);
@@ -140,7 +140,7 @@ void CDeterm::OnEnKillfocusRy()
 	UpdateData(1);
 	CStringA s(m_right_y);
 	const char* p = s;
-	if (!atof(p)) {
+	if (!atof(p) && s != "0") {
 		MessageBox(L"Incorrect value!", MB_OK);
 		m_right_y = L"1";
 		UpdateData(0);

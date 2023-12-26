@@ -33,7 +33,7 @@ END_MESSAGE_MAP()
 // Создание или уничтожение CCoordGraphDoc
 
 CCoordGraphDoc::CCoordGraphDoc() noexcept
-	:i(0), res(NULL), l(NULL), r(NULL), path(NULL), f(nullptr), multdim_opt(nullptr), stop_crit(nullptr)
+	:i(0), x0(NULL), l(NULL), r(NULL), path(NULL), f(nullptr), multdim_opt(nullptr), stop_crit(nullptr)
 {
 	// TODO: добавьте код для одноразового вызова конструктора
 
@@ -41,8 +41,8 @@ CCoordGraphDoc::CCoordGraphDoc() noexcept
 
 CCoordGraphDoc::~CCoordGraphDoc()
 {
-	if (res.size() > 0)
-		res.clear();
+	if (x0.size() > 0)
+		x0.clear();
 	if (l.size() > 0)
 		l.clear();
 	if (r.size() > 0)
@@ -76,8 +76,8 @@ int CCoordGraphDoc::GetI() {
 	return i;
 }
 
-std::vector<double> CCoordGraphDoc::GetRes() {
-	return res;
+std::vector<double> CCoordGraphDoc::GetX0() {
+	return x0;
 }
 
 std::vector<double> CCoordGraphDoc::GetLB() {
@@ -96,6 +96,9 @@ func* CCoordGraphDoc::GetF() {
 	return f.get();
 }
 
+MultdimOpt* CCoordGraphDoc::GetMULTDIMOPT() {
+	return multdim_opt;
+}
 // Сериализация CCoordGraphDoc
 
 void CCoordGraphDoc::Serialize(CArchive& ar)
@@ -202,9 +205,11 @@ void CCoordGraphDoc::OnCoordinatedescent()
 		CStringA sy_str(det.m_start_y);
 		const char* sy = sy_str;
 
-		std::vector<double> x_0(2);
-		x_0[0] = atof(sx);
-		x_0[1] = atof(sy);
+		if (x0.size() > 0)
+			x0.clear();
+
+		x0.push_back(atof(sx));
+		x0.push_back(atof(sy));
 
 		if (l.size() > 0)
 			l.clear();
@@ -252,7 +257,7 @@ void CCoordGraphDoc::OnCoordinatedescent()
 			path.clear();
 
 		multdim_opt = new DetermineSearch(*f, r, l, *stop_crit, new TernarySearch(0.0001));
-		res = multdim_opt->Optimize(x_0, path);
+		//res = multdim_opt->Optimize(x_0, path);
 		
 		UpdateAllViews(0);
 	}
@@ -287,9 +292,11 @@ void CCoordGraphDoc::OnRandomsearch()
 		CStringA sy_str(rand.m_start_y);
 		const char* sy = sy_str;
 
-		std::vector<double> x_0(2);
-		x_0[0] = atof(sx);
-		x_0[1] = atof(sy);
+		if (x0.size() > 0)
+			x0.clear();
+
+		x0.push_back(atof(sx));
+		x0.push_back(atof(sy));
 
 		if (l.size() > 0)
 			l.clear();
@@ -339,7 +346,7 @@ void CCoordGraphDoc::OnRandomsearch()
 		}
 
 		multdim_opt = new RandomSearch(*f, r, l, atof(p), atof(delta), *stop_crit);
-		res = multdim_opt->Optimize(x_0, path);
+		//res = multdim_opt->Optimize(x_0, path);
 		
 		
 

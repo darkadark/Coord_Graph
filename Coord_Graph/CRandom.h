@@ -32,8 +32,8 @@ public:
 	CString m_right_x;
 	CString m_right_y;
 	afx_msg void OnBnClickedOk();
-	afx_msg void OnEnKillfocusSx();
-	afx_msg void OnEnKillfocusSy();
+//	afx_msg void OnEnKillfocusSx();
+//	afx_msg void OnEnKillfocusSy();
 	afx_msg void OnEnKillfocusLx();
 	afx_msg void OnEnKillfocusLy();
 	afx_msg void OnEnKillfocusRx();
@@ -42,4 +42,7 @@ public:
 	CString m_delta;
 	afx_msg void OnEnKillfocusP();
 	afx_msg void OnEnKillfocusDelta();
+	
+	afx_msg void OnEnKillfocusSx();
+	afx_msg void OnEnKillfocusSy();
 };

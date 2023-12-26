@@ -26,11 +26,14 @@ IMPLEMENT_DYNCREATE(CCoordGraphView, CView)
 BEGIN_MESSAGE_MAP(CCoordGraphView, CView)
 	ON_WM_CONTEXTMENU()
 	ON_WM_RBUTTONUP()
+	ON_WM_LBUTTONDOWN()
+	ON_WM_LBUTTONUP()
 END_MESSAGE_MAP()
 
 // Создание или уничтожение CCoordGraphView
 
 CCoordGraphView::CCoordGraphView() noexcept
+	:x0(NULL)
 {
 	// TODO: добавьте код создания
 
@@ -74,16 +77,24 @@ void CCoordGraphView::OnDraw(CDC* pdc)
 	
 	int j = pDoc->GetI();
 
-	if (j == 1 || j == 2) {
+	if (j == 1 || j == 2 || x0.size()>0) {
 		
-		std::vector<double> res = pDoc->GetRes();
+		std::vector<double> x_0 = pDoc->GetX0();
 		std::vector<double> l = pDoc->GetLB();
 		std::vector<double> r = pDoc->GetRB();
-		std::vector<std::vector<double>> path = pDoc->GetPATH();
+		std::vector<std::vector<double>> path;// = pDoc->GetPATH();
 		func* f = pDoc->GetF();
 		std::vector<std::vector<double>> matrix;
+		MultdimOpt* multdim_opt = pDoc->GetMULTDIMOPT();
 		
-		
+		if (x0.size() > 0) {
+			if (x0[0] > rc.Width() / 10 && x0[0] < rc.Width() * 0.9 && x0[1] < rc.Height() * 0.9 && x0[1] > rc.Height() * 0.1) {
+				x_0[0] = l[0] + (r[0] - l[0]) * (x0[0] - 0.1* rc.Width()) / (rc.Width() * 0.8);
+				x_0[1] = l[1] + (r[1] - l[1]) *(0.9* rc.Height() -  x0[1] ) /( rc.Height() * 0.8);
+			}
+		}
+
+		std::vector<double> res = multdim_opt->Optimize(x_0, path);
 		if (f != nullptr) {
 			double h0 = (r[0] - l[0]) * 2/ (rc.Width() * 0.8);
 			double h1 = (r[1] - l[1]) * 2/ (rc.Height() * 0.8);
@@ -159,7 +170,10 @@ void CCoordGraphView::OnDraw(CDC* pdc)
 		res11.Format(L"x_0 = (%.2f, %.2f)", path[0][0], path[0][1]);
 		pDC.TextOut(rc.Width() /2, rc.Height() * 0.05, res11);
 		pdc->BitBlt(0, 0, rc.Width(), rc.Height(), &pDC, 0, 0, SRCCOPY);
+
+		x0.clear();
 	}
+	x0.clear();
 	// TODO: добавьте здесь код отрисовки для собственных данных
 }
 
@@ -199,3 +213,22 @@ CCoordGraphDoc* CCoordGraphView::GetDocument() const // встроена нео�
 
 
 // Обработчики сообщений CCoordGraphView
+
+
+void CCoordGraphView::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	// TODO: добавьте свой код обработчика сообщений или вызов стандартного
+	x0.push_back(point.x);
+	x0.push_back(point.y);
+	CView::OnLButtonDown(nFlags, point);
+	
+
+}
+
+
+void CCoordGraphView::OnLButtonUp(UINT nFlags, CPoint point)
+{
+	// TODO: добавьте свой код обработчика сообщений или вызов стандартного
+	Invalidate(TRUE);
+	CView::OnLButtonUp(nFlags, point);
+}
